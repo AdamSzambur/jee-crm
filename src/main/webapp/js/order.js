@@ -1,15 +1,30 @@
+document.addEventListener("DOMContentLoaded", function(){
 
-    console.log('ascsaasasc');
+    var clientSelect = document.querySelector('#clientSelect');
 
-    // var clientSelect = document.querySelector('#clientSelect');
-    //
-    // console.log(clientSelect);
 
-    // var buttons = document.querySelectorAll('#bubblingButtons button');
-    //
-    // for (var i=0;i<buttons.length;i++) {
-    //     this.addEventListener('click',function() {
-    //         this.dataset.counter++;
-    //     });
-    // }
+    clientSelect.addEventListener('change', function(e) {
+        console.log(clientSelect.value);
+    });
 
+
+    var employeeSelect = document.querySelector('#employeeSelect');
+    var costOfmanHour= document.querySelector('#costOfmanHour');
+
+
+
+    employeeSelect.addEventListener('change', function(e) {
+
+        var test = '${employeeList}';
+
+        console.log(test);
+        costOfmanHour.value = '${employeeList}';
+
+    })
+
+
+
+
+
+
+});

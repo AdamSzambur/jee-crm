@@ -16,9 +16,15 @@ public class OrderDao {
             "UPDATE orders SET date_delivered_to_repair = ?, date_planned_repair = ? , date_started_repair = ?, employee_id = ?, problem_description = ?, reapir_description = ?, status_id = ?, vehicle_id = ?, repair_cost_for_customer = ?, cost_of_parts = ?, cost_of_man_hour = ?, man_hour = ? where id = ?";
     private static final String DELETE_QUERY =
             "DELETE FROM orders WHERE id = ?";
-
     private static final String READ_ALL_FOR_STATUS_ID_QUERY =
             "SELECT orders.*, vehicle.car_brand, vehicle.model, employee.firstname, employee.lastname FROM orders JOIN vehicle ON orders.vehicle_id = vehicle.id JOIN employee ON orders.employee_id = employee.id WHERE status_id = ?";
+    private static final String READ_ALL_FOR_EMPLOYEE_ID_QUERY =
+            "SELECT orders.*, vehicle.car_brand, vehicle.model, employee.firstname, employee.lastname FROM orders JOIN vehicle ON orders.vehicle_id = vehicle.id JOIN employee ON orders.employee_id = employee.id WHERE employee_id = ?";
+    private static final String READ_ALL_QUERY =
+            "SELECT orders.*, vehicle.car_brand, vehicle.model, employee.firstname, employee.lastname FROM orders JOIN vehicle ON orders.vehicle_id = vehicle.id JOIN employee ON orders.employee_id = employee.id";
+
+
+
 
     public Order create(Order order) {
         try (Connection conn = DbUtil.getConnection()) {
@@ -138,7 +144,75 @@ public class OrderDao {
                 order.setModel(resultSet.getString("model"));
                 order.setEmployeeFirstName(resultSet.getString("firstname"));
                 order.setEmployeeLastName(resultSet.getString("lastname"));
+                orders.add(order);
+            }
+            return orders;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
+    public List<Order> readAllForEmployee(int employeeId) {
+        try (Connection conn = DbUtil.getConnection()) {
+            List<Order> orders = new ArrayList<>();
+            PreparedStatement statement = conn.prepareStatement(READ_ALL_FOR_EMPLOYEE_ID_QUERY);
+            statement.setInt(1, employeeId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Order order = new Order();
+                order.setId(resultSet.getInt("id"));
+                order.setDateDeliveredToRepair(resultSet.getString("date_delivered_to_repair"));
+                order.setDatePlannedRepair(resultSet.getString("date_planned_repair"));
+                order.setDateStartedRepair(resultSet.getString("date_started_repair"));
+                order.setEmployeeId(resultSet.getInt("employee_id"));
+                order.setProblemDescription(resultSet.getString("problem_description"));
+                order.setRepairDescription(resultSet.getString("repair_description"));
+                order.setStatusId(resultSet.getInt("status_id"));
+                order.setVehicleId(resultSet.getInt("vehicle_id"));
+                order.setRepairCostForCustommer(resultSet.getDouble("repair_cost_for_customer"));
+                order.setCostOfParts(resultSet.getDouble("cost_of_parts"));
+                order.setCostOfmanHour(resultSet.getDouble("cost_of_man_hour"));
+                order.setManHour(resultSet.getInt("man_hour"));
+
+                order.setCarBrand(resultSet.getString("car_brand"));
+                order.setModel(resultSet.getString("model"));
+                order.setEmployeeFirstName(resultSet.getString("firstname"));
+                order.setEmployeeLastName(resultSet.getString("lastname"));
+                orders.add(order);
+            }
+            return orders;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public List<Order> readAll() {
+        try (Connection conn = DbUtil.getConnection()) {
+            List<Order> orders = new ArrayList<>();
+            PreparedStatement statement = conn.prepareStatement(READ_ALL_QUERY);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Order order = new Order();
+                order.setId(resultSet.getInt("id"));
+                order.setDateDeliveredToRepair(resultSet.getString("date_delivered_to_repair"));
+                order.setDatePlannedRepair(resultSet.getString("date_planned_repair"));
+                order.setDateStartedRepair(resultSet.getString("date_started_repair"));
+                order.setEmployeeId(resultSet.getInt("employee_id"));
+                order.setProblemDescription(resultSet.getString("problem_description"));
+                order.setRepairDescription(resultSet.getString("repair_description"));
+                order.setStatusId(resultSet.getInt("status_id"));
+                order.setVehicleId(resultSet.getInt("vehicle_id"));
+                order.setRepairCostForCustommer(resultSet.getDouble("repair_cost_for_customer"));
+                order.setCostOfParts(resultSet.getDouble("cost_of_parts"));
+                order.setCostOfmanHour(resultSet.getDouble("cost_of_man_hour"));
+                order.setManHour(resultSet.getInt("man_hour"));
+
+                order.setCarBrand(resultSet.getString("car_brand"));
+                order.setModel(resultSet.getString("model"));
+                order.setEmployeeFirstName(resultSet.getString("firstname"));
+                order.setEmployeeLastName(resultSet.getString("lastname"));
                 orders.add(order);
             }
             return orders;
