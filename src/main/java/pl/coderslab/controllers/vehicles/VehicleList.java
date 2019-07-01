@@ -1,7 +1,6 @@
-package pl.coderslab.controllers;
+package pl.coderslab.controllers.vehicles;
 
-import pl.coderslab.db.dao.EmployeeDao;
-import pl.coderslab.db.dao.OrderDao;
+import pl.coderslab.db.dao.CustomerDao;
 import pl.coderslab.db.dao.VehicleDao;
 
 import javax.servlet.ServletException;
@@ -11,18 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("")
-public class MainPage extends HttpServlet {
+@WebServlet("/vehicle/vehicleList")
+public class VehicleList extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        System.out.println("test");
-
-        // pobieramy zamowienia aktualnie realizowane Status 'W naprawie'
-        request.setAttribute("orders", new OrderDao<Integer>().readAllFor("status",3));
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
+        request.setAttribute("vehicles", new VehicleDao().readAll());
+        getServletContext().getRequestDispatcher("/vehicleList.jsp").forward(request, response);
     }
 }

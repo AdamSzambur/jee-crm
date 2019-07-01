@@ -1,8 +1,9 @@
-package pl.coderslab.controllers.employee;
+package pl.coderslab.controllers.vehicles;
 
 import pl.coderslab.db.dao.EmployeeDao;
 import pl.coderslab.db.dao.OrderDao;
 import pl.coderslab.db.dao.StatusDao;
+import pl.coderslab.db.dao.VehicleDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,24 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/employee/employeeOrder")
-public class EmployeeOrder extends HttpServlet {
+@WebServlet(urlPatterns = {"/vehicle/vehicleOrder","/customer/vehicleOrder"})
+public class VehicleOrder extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer employeeId = getIntParameter(request,"employeeId");
+        Integer vehicleId = getIntParameter(request,"vehicleId");
 
-        if (employeeId!=null) {
-            request.setAttribute("employeeId", employeeId);
-            request.setAttribute("orders", new OrderDao<Integer>().readAllFor("employee",employeeId));
+        if (vehicleId!=null) {
+            request.setAttribute("vehicleId", vehicleId);
+            request.setAttribute("orders", new OrderDao<Integer>().readAllFor("vehicle",vehicleId));
         } else {
             request.setAttribute("orders", new OrderDao().readAll());
         }
         request.setAttribute("statusList", new StatusDao().readAll());
-        request.setAttribute("employeeList", new EmployeeDao().readAll());
-        getServletContext().getRequestDispatcher("/employeeOrder.jsp").forward(request,response);
+        request.setAttribute("vehicleList", new VehicleDao().readAll());
+        getServletContext().getRequestDispatcher("/vehicleOrder.jsp").forward(request,response);
     }
 
 

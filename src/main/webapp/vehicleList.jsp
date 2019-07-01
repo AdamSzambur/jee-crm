@@ -21,7 +21,7 @@
                 <span>&times;</span>
             </button><br>
             <p style="text-align: center">
-                Czy napewno chcesz usunąć tego klienta
+                Czy napewno chcesz usunąć ten pojazd ?
                 <br><br>
                 <a role="button" class="btn btn-danger" href="" id="deleteBtn">Usuń</a>
                 <a role="button" class="btn btn-success" href="" onclick="event.preventDefault(); $('#deleteMsg').toggleClass('invisible');">Anuluj</a>
@@ -29,39 +29,44 @@
         </div>
 
         <br>
-        <h4 class="cover-heading">Lista Klientów </h4>
+        <h4 class="cover-heading">Lista Pojazdów </h4>
         <p>
         <table class="table table-striped">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Imię</th>
-                <th scope="col">Nazwisko</th>
-                <th scope="col">Data urodzenia</th>
+                <th scope="col">Klient</th>
+                <th scope="col">Marka</th>
+                <th scope="col">Model</th>
+                <th scope="col">Numer rejestracyjny</th>
+                <th scope="col">Rok produkcji</th>
+                <th scope="col">Data nastepnego przeglądu</th>
                 <th scope="col">Akcja</th>
             </tr>
             </thead>
             <tbody>
 
-                <c:forEach items="${customers}" var="customer" varStatus="i">
+                <c:forEach items="${vehicles}" var="vehicle" varStatus="i">
                 <tr>
                     <th scope="row">${i.index+1}</th>
-                    <td>${customer.firstName}</td>
-                    <td>${customer.lastName}</td>
-                    <td>${customer.birthDate}</td>
+                    <td>${vehicle.customerId}</td>
+                    <td>${vehicle.carBrand}</td>
+                    <td>${vehicle.model}</td>
+                    <td>${vehicle.registrationNumber}</td>
+                    <td>${vehicle.productionYear}</td>
+                    <td>${vehicle.nextTechnicalInspection}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="First group">
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/customer/customerEdit?customerId=${customer.id}'">Edytuj</button>
-                            <button type="button" class="btn btn-danger"  onclick="event.preventDefault();$('#deleteBtn').attr('href','${pageContext.request.contextPath}/customer/customerDel?customerId=${customer.id}'); $('#deleteMsg').toggleClass('invisible');">Usuń</button>
-                            <button type="button" class="btn btn-success" onclick="window.location.href='${pageContext.request.contextPath}/customer/customerOrder?customerId=${customer.id}'">Zlecenia</button>
-                            <button type="button" class="btn btn-secondary" onclick="window.location.href='${pageContext.request.contextPath}/customer/customerVehicle?customerId=${customer.id}'">Pojazdy</button>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/vehicle/vehicleEdit?vehicleId=${vehicle.id}'">Edytuj</button>
+                            <button type="button" class="btn btn-danger"  onclick="event.preventDefault();$('#deleteBtn').attr('href','${pageContext.request.contextPath}/vehicle/vehicleDel?vehicleId=${vehicle.id}'); $('#deleteMsg').toggleClass('invisible');">Usuń</button>
+                            <button type="button" class="btn btn-success" onclick="window.location.href='${pageContext.request.contextPath}/vehicle/vehicleOrder?vehicleId=${vehicle.id}'">Zlecenia</button>
                         </div>
                     </td>
                 </tr>
                 </c:forEach>
                 <tr>
                     <td colspan="8">
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/customer/customerAdd'">Dodaj nowego klienta</button>
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/vehicle/vehicleAdd'">Dodaj nowy pojazd</button>
                     </td>
                 </tr>
             </tbody>

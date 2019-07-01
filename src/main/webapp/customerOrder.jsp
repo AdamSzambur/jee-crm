@@ -14,14 +14,14 @@
             </div>
         </c:if>
         <br>
-            <h4 class="cover-heading">Zlecenia pracownika </h4>
-            <form action="${pageContext.request.contextPath}/employee/employeeOrder" method="get">
+            <h4 class="cover-heading">Zlecenia klienta </h4>
+            <form action="${pageContext.request.contextPath}/customer/customerOrder" method="get">
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <select id="employeeId" class="custom-select" onchange="this.form.submit()" name="employeeId">
-                            <option value="">Wszyscy pracownicy</option>
-                            <c:forEach items="${employeeList}" var="employee">
-                                <option value="${employee.id}" <c:if test="${employee.id == employeeId}">selected</c:if> >${employee.firstName} ${employee.lastName}</option>
+                        <select id="customerId" class="custom-select" onchange="this.form.submit()" name="customerId">
+                            <option value="">Wszyscy klienci</option>
+                            <c:forEach items="${customerList}" var="customer">
+                                <option value="${customer.id}" <c:if test="${customer.id == customerId}">selected</c:if> >${customer.firstName} ${customer.lastName}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -51,7 +51,7 @@
                         <td>${order.problemDescription}</td>
                         <td>${order.employeeFirstName} ${order.employeeLastName}</td>
                         <td><c:forEach items="${statusList}" var="status"><c:if test="${order.statusId == status.id}">${status.value}</c:if></c:forEach></td>
-                        <td><a role="button" class="btn btn-primary" href="${pageContext.request.contextPath}/employee/orderDetails?orderId=${order.id}">Szczegóły</a></td>
+                        <td><a role="button" class="btn btn-primary" href="${pageContext.request.contextPath}/customer/orderDetails?orderId=${order.id}">Szczegóły</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

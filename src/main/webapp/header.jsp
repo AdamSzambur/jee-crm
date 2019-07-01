@@ -9,13 +9,8 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
     <title>Warsztat samochodowy</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/">
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -61,8 +56,6 @@
             height: 150px;
             overflow: auto;
         }
-
-
     </style>
 </head>
 <body class="d-flex flex-column h-100">
@@ -89,23 +82,30 @@
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/customer/customerOrder">Zlecenia klienta</a>
                     </div>
                 </li>
-
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle <c:if test="${cat == 'order'}">active</c:if>" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-folder-open"></i> Zlecenia
+                    <a class="nav-link dropdown-toggle <c:if test="${cat == 'vehicle'}">active</c:if>" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-car"></i> Pojazdy
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/vehicle/vehicleList">Lista pojazdów</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/vehicle/vehicleAdd">Dodaj pojazd</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle <c:if test="${cat == 'order'}">active</c:if>" href="#" id="navbarDropdownMenuLink3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-folder-open"></i> Zlecenia
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/order/orderList">Lista zleceń</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/order/orderAdd">Dodaj zlecenie</a>
                     </div>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle <c:if test="${cat == 'employee'}">active</c:if>" href="#" id="navbarDropdownMenuLink3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle <c:if test="${cat == 'employee'}">active</c:if>" href="#" id="navbarDropdownMenuLink4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-users"></i> Pracownicy
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink4">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/employee/employeeList">Lista pracowników</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/employee/employeeAdd">Dodaj pracownika</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/employee/employeeOrder">Zlecenia pracownika</a>
