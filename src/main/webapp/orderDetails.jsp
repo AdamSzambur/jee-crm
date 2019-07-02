@@ -2,11 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="header.jsp"/>
 <main role="main" class="flex-shrink-0">
-    <script src="js/order.js"></script>
     <div class="container">
         <%--        message from servlet--%>
         <c:if test="${msg!=null}">
-            <br><br><br>
+            <br>
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     ${msg}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -14,7 +13,7 @@
                 </button>
             </div>
         </c:if>
-        <br><br><br>
+        <br>
 
         <div class="rounded border p-5">
 

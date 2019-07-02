@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/vehicle/vehicleAdd", "/customer/vehicleAdd"})
+@WebServlet(urlPatterns = {"/vehicle/vehicleAdd", "/customer/vehicleAdd", "/order/vehicleAdd"})
 public class VehicleAdd extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -24,17 +24,24 @@ public class VehicleAdd extends HttpServlet {
         String nextTechnicalInspection = request.getParameter("nextTechnicalInspection");
         Integer vehicleCustomerId = getIntParameter(request,"vehicleCustomerId");
         Integer customerId = getIntParameter(request,"customerId");
+        Integer orderId = getIntParameter(request,"orderId");
 
         Vehicle vehicle = new Vehicle(model,carBrand,productionYear,registrationNumber,nextTechnicalInspection,vehicleCustomerId);
 
         try {
-            new VehicleDao().create(vehicle);
+            vehicle = new VehicleDao().create(vehicle);
             if (getCatalogueName(request).equals("customer")) {
                 response.sendRedirect(getServletContext().getContextPath() + "/customer/customerVehicle?msg=Dodano%20nowy%20pojazd&customerId="+customerId);
-            } else {
+            } if (getCatalogueName(request).equals("vehicle")){
                 response.sendRedirect(getServletContext().getContextPath() + "/vehicle/vehicleList?msg=Dodanow%20nowy%20pojazd&customerId="+customerId);
+            } if (getCatalogueName(request).equals("order")){
+                response.sendRedirect(getServletContext().getContextPath() + "/order/orderEdit?orderId="+orderId+"&customerId="+customerId+"&vehicleId="+ vehicle.getId());
             }
         } catch (RuntimeException ex) {
+            request.setAttribute("customerId", customerId);
+            request.setAttribute("orderId", orderId);
+            request.setAttribute("cat", getCatalogueName(request));
+            request.setAttribute("customerList", new CustomerDao().readAll());
             request.setAttribute("msg", ex.getMessage());
             request.setAttribute("vehicle", vehicle);
             getServletContext().getRequestDispatcher("/vehicleAdd.jsp").forward(request, response);
@@ -43,11 +50,16 @@ public class VehicleAdd extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer customerId = getIntParameter(request,"customerId");
+        Integer orderId = getIntParameter(request,"orderId");
         request.setAttribute("customerId", customerId);
+        request.setAttribute("orderId", orderId);
         request.setAttribute("cat", getCatalogueName(request));
-
-
         request.setAttribute("customerList", new CustomerDao().readAll());
+        Vehicle vehicle = new Vehicle();
+        if (customerId!=null) {
+            vehicle.setCustomerId(customerId);
+        }
+        request.setAttribute("vehicle",vehicle);
         getServletContext().getRequestDispatcher("/vehicleAdd.jsp").forward(request,response);
     }
 

@@ -16,7 +16,8 @@
 
             <h4 class="cover-heading">Dodawanie nowego klienta</h4>
             <p>
-            <form style="text-align: left" action="${pageContext.request.contextPath}/customer/customerAdd" method="post">
+            <form style="text-align: left" action="${pageContext.request.contextPath}/${cat}/customerAdd" method="post">
+                <input hidden name="orderId" value="${orderId}">
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="firstName">Imię</label>

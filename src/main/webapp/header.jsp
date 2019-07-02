@@ -57,6 +57,7 @@
             overflow: auto;
         }
     </style>
+    <script src="https://kit.fontawesome.com/da6d9e6874.js"></script>
 </head>
 <body class="d-flex flex-column h-100">
 <header>

@@ -27,10 +27,19 @@ public class Order {
 
     private String statusValue;
 
+    private int customerId;
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
     public String getRegistrationNumber() {
         return registrationNumber;
     }
-
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
     }

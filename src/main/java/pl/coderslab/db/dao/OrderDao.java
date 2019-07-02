@@ -7,81 +7,81 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDao <T>{
+public class OrderDao<T> {
     private static final String CREATE_QUERY =
-            "INSERT INTO orders(date_delivered_to_repair, date_planned_repair, date_started_repair, employee_id, problem_description, reapir_description, status_id, vehicle_id, repair_cost_for_customer, cost_of_parts, cost_of_man_hour, man_hour) VALUES (?, ?, ?, ? , ?, ?,?,?,?,?,?,?)";
+            "INSERT INTO orders(date_delivered_to_repair, date_planned_repair, date_started_repair, employee_id, problem_description, repair_description, status_id, vehicle_id, repair_cost_for_customer, cost_of_parts, cost_of_man_hour, man_hour) VALUES (?, ?, ?, ? , ?, ?,?,?,?,?,?,?)";
     private static final String READ_QUERY =
             "SELECT orders.*, vehicle.car_brand, vehicle.model, vehicle.registration_number, " +
-            "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
-            "customer.lastname as customerLastName, status.value FROM orders " +
-            "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
-            "JOIN employee ON orders.employee_id = employee.id " +
-            "JOIN customer ON customer.id = vehicle.customer_id " +
-            "JOIN status ON status.id = orders.status_id " +
-            " where orders.id = ?";
+                    "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
+                    "customer.lastname as customerLastName, customer.id as customer_id, status.value FROM orders " +
+                    "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
+                    "JOIN employee ON orders.employee_id = employee.id " +
+                    "JOIN customer ON customer.id = vehicle.customer_id " +
+                    "JOIN status ON status.id = orders.status_id " +
+                    " where orders.id = ?";
     private static final String UPDATE_QUERY =
-            "UPDATE orders SET date_delivered_to_repair = ?, date_planned_repair = ? , date_started_repair = ?, employee_id = ?, problem_description = ?, reapir_description = ?, status_id = ?, vehicle_id = ?, repair_cost_for_customer = ?, cost_of_parts = ?, cost_of_man_hour = ?, man_hour = ? where id = ?";
+            "UPDATE orders SET date_delivered_to_repair = ?, date_planned_repair = ? , date_started_repair = ?, employee_id = ?, problem_description = ?, repair_description = ?, status_id = ?, vehicle_id = ?, repair_cost_for_customer = ?, cost_of_parts = ?, cost_of_man_hour = ?, man_hour = ? where id = ?";
     private static final String DELETE_QUERY =
             "DELETE FROM orders WHERE id = ?";
     private static final String READ_ALL_FOR_STATUS_ID_QUERY =
             "SELECT orders.*, vehicle.car_brand, vehicle.model, vehicle.registration_number, " +
-            "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
-            "customer.lastname as customerLastName, status.value FROM orders " +
-            "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
-            "JOIN employee ON orders.employee_id = employee.id " +
-            "JOIN customer ON customer.id = vehicle.customer_id " +
-            "JOIN status ON status.id = orders.status_id " +
-            " where status_id = ?";
+                    "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
+                    "customer.lastname as customerLastName,customer.id as customer_id, status.value FROM orders " +
+                    "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
+                    "JOIN employee ON orders.employee_id = employee.id " +
+                    "JOIN customer ON customer.id = vehicle.customer_id " +
+                    "JOIN status ON status.id = orders.status_id " +
+                    " where status_id = ?";
     private static final String READ_ALL_FOR_EMPLOYEE_ID_QUERY =
             "SELECT orders.*, vehicle.car_brand, vehicle.model, vehicle.registration_number, " +
-            "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
-            "customer.lastname as customerLastName, status.value FROM orders " +
-            "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
-            "JOIN employee ON orders.employee_id = employee.id " +
-            "JOIN customer ON customer.id = vehicle.customer_id " +
-            "JOIN status ON status.id = orders.status_id " +
-            " where employee_id = ?";
+                    "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
+                    "customer.lastname as customerLastName,customer.id as customer_id, status.value FROM orders " +
+                    "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
+                    "JOIN employee ON orders.employee_id = employee.id " +
+                    "JOIN customer ON customer.id = vehicle.customer_id " +
+                    "JOIN status ON status.id = orders.status_id " +
+                    " where employee_id = ?";
     private static final String READ_ALL_FOR_CUSTOMER_ID_QUERY =
             "SELECT orders.*, vehicle.car_brand, vehicle.model, vehicle.registration_number, " +
-            "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
-            "customer.lastname as customerLastName, status.value FROM orders " +
-            "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
-            "JOIN employee ON orders.employee_id = employee.id " +
-            "JOIN customer ON customer.id = vehicle.customer_id " +
-            "JOIN status ON status.id = orders.status_id " +
-            " where customer.id=?";
+                    "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
+                    "customer.lastname as customerLastName,customer.id as customer_id, status.value FROM orders " +
+                    "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
+                    "JOIN employee ON orders.employee_id = employee.id " +
+                    "JOIN customer ON customer.id = vehicle.customer_id " +
+                    "JOIN status ON status.id = orders.status_id " +
+                    " where customer.id=?";
     private static final String READ_ALL_FOR_VEHICLE_ID_QUERY =
             "SELECT orders.*, vehicle.car_brand, vehicle.model, vehicle.registration_number, " +
-            "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
-            "customer.lastname as customerLastName, status.value FROM orders " +
-            "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
-            "JOIN employee ON orders.employee_id = employee.id " +
-            "JOIN customer ON customer.id = vehicle.customer_id " +
-            "JOIN status ON status.id = orders.status_id " +
-            "WHERE orders.vehicle_id = ?";
+                    "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
+                    "customer.lastname as customerLastName,customer.id as customer_id, status.value FROM orders " +
+                    "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
+                    "JOIN employee ON orders.employee_id = employee.id " +
+                    "JOIN customer ON customer.id = vehicle.customer_id " +
+                    "JOIN status ON status.id = orders.status_id " +
+                    "WHERE orders.vehicle_id = ?";
     private static final String READ_ALL_QUERY =
             "SELECT orders.*, vehicle.car_brand, vehicle.model, vehicle.registration_number, " +
-            "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
-            "customer.lastname as customerLastName, status.value FROM orders " +
-            "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
-            "JOIN employee ON orders.employee_id = employee.id " +
-            "JOIN customer ON customer.id = vehicle.customer_id " +
-            "JOIN status ON status.id = orders.status_id";
+                    "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
+                    "customer.lastname as customerLastName,customer.id as customer_id, status.value FROM orders " +
+                    "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
+                    "JOIN employee ON orders.employee_id = employee.id " +
+                    "JOIN customer ON customer.id = vehicle.customer_id " +
+                    "JOIN status ON status.id = orders.status_id";
 
     private static final String READ_ALL_FILTER_QUERY =
             "SELECT orders.*, vehicle.car_brand, vehicle.model, vehicle.registration_number, " +
-            "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
-            "customer.lastname as customerLastName, status.value FROM orders " +
-            "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
-            "JOIN employee ON orders.employee_id = employee.id " +
-            "JOIN customer ON customer.id = vehicle.customer_id " +
-            "JOIN status ON status.id = orders.status_id " +
-            "where concat(orders.problem_description, vehicle.car_brand, vehicle.model, vehicle.registration_number, employee.firstname,' ',employee.lastname, customer.firstname, ' ', customer.lastname, status.value) like ?";
+                    "employee.firstname, employee.lastname, customer.firstname as customerFirstName, " +
+                    "customer.lastname as customerLastName,customer.id as customer_id, status.value FROM orders " +
+                    "JOIN vehicle ON orders.vehicle_id = vehicle.id " +
+                    "JOIN employee ON orders.employee_id = employee.id " +
+                    "JOIN customer ON customer.id = vehicle.customer_id " +
+                    "JOIN status ON status.id = orders.status_id " +
+                    "where concat(orders.problem_description, vehicle.car_brand, vehicle.model, vehicle.registration_number, employee.firstname,' ',employee.lastname, customer.firstname, ' ', customer.lastname, status.value) like ?";
 
     public Order create(Order order) {
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-            statement = setStatment(statement,order);
+            statement = setStatment(statement, order);
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -112,7 +112,7 @@ public class OrderDao <T>{
     public void update(Order order) {
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_QUERY);
-            statement = setStatment(statement,order);
+            statement = setStatment(statement, order);
             statement.setInt(13, order.getId());
             statement.executeUpdate();
         } catch (Exception ex) {
@@ -133,7 +133,7 @@ public class OrderDao <T>{
     }
 
 
-        public List<Order> readAllFor(String caseName, T caseValue) {
+    public List<Order> readAllFor(String caseName, T caseValue) {
         try (Connection conn = DbUtil.getConnection()) {
             List<Order> orders = new ArrayList<>();
 
@@ -161,11 +161,10 @@ public class OrderDao <T>{
                 }
             }
             if (caseValue instanceof Integer) {
-                statement.setInt(1, (Integer)caseValue);
+                statement.setInt(1, (Integer) caseValue);
             } else {
-                statement.setString(1, "%"+caseValue+"%");
+                statement.setString(1, "%" + caseValue + "%");
             }
-
 
 
             ResultSet resultSet = statement.executeQuery();
@@ -196,7 +195,7 @@ public class OrderDao <T>{
     }
 
 
-    private static Order setOrder (ResultSet resultSet) throws SQLException {
+    private static Order setOrder(ResultSet resultSet) throws SQLException {
         Order order = new Order();
         order.setId(resultSet.getInt("id"));
         order.setDateDeliveredToRepair(resultSet.getString("date_delivered_to_repair"));
@@ -218,6 +217,7 @@ public class OrderDao <T>{
         order.setEmployeeLastName(resultSet.getString("lastname"));
         order.setCustomerFirstName(resultSet.getString("customerFirstName"));
         order.setCustomerLastName(resultSet.getString("customerLastName"));
+        order.setCustomerId(resultSet.getInt("customer_id"));
         order.setStatusValue(resultSet.getString("value"));
         return order;
     }

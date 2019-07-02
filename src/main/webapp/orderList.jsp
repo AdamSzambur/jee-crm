@@ -36,7 +36,10 @@
                 <div class="input-group mb-3" >
                     <input name="filter" id="filter" type="text" class="form-control" <c:if test="${not empty filter}">value="${filter}"</c:if> placeholder="Podaj szukaną frazę w tablicy zleceń" aria-label="Podaj szukaną frazę w tablicy zleceń" aria-describedby="button-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="button" id="button-addon2" onclick="$(this).closest('form').submit()">Szukaj</button>
+                        <button class="btn btn-outline-danger" type="button" id="button-addon2" onclick="$('#filter').attr('value',''); $(this).closest('form').submit()">Wyczyść filtr</button>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" id="button-addon3" onclick="$(this).closest('form').submit()">Szukaj</button>
                     </div>
                 </div>
                 <small id="emailHelp" class="form-text text-muted">Podaj szykaną frazę w tablicy zleceń.</small>

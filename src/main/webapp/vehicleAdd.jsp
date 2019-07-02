@@ -18,12 +18,16 @@
             <form style="text-align: left" action="${pageContext.request.contextPath}/${cat}/vehicleAdd" method="post">
                 <input type="hidden" value="${vehicle.id}" name="id">
                 <input type="hidden" value="${customerId}" name="customerId">
+                <input type="hidden" value="${orderId}" name="orderId">
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="vehicleCustomerId">Klient</label>
                         <select id="vehicleCustomerId" class="custom-select" aria-label="Imie i nazwisko klienta" name="vehicleCustomerId">
                             <c:forEach items="${customerList}" var="customer">
-                                <option value="${customer.id}" <c:if test="${customer.id == customerId}">selected</c:if> >${customer.firstName} ${customer.lastName}</option>
+                                <option value="${customer.id}"
+                                        <c:if test="${customer.id == vehicle.customerId}"> selected</c:if>
+                                        <c:if test="${(customerId>0 && customer.id != customerId)}"> disabled</c:if>
+                                >${customer.firstName} ${customer.lastName}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -60,7 +64,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                        <button type="submit" class="btn btn-primary">Dodaj pojazd</button>
                     </div>
                 </div>
             </form>
