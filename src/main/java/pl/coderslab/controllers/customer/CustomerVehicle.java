@@ -17,15 +17,15 @@ public class CustomerVehicle extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer customerId = getIntParameter(request,"customerId");
-        if (customerId!=null) {
+        Integer customerId = getIntParameter(request, "customerId");
+        if (customerId != null) {
             request.setAttribute("customerId", customerId);
             request.setAttribute("vehicles", new VehicleDao().readAllForCustomer(customerId));
         } else {
             request.setAttribute("vehicles", new VehicleDao().readAll());
         }
         request.setAttribute("customerList", new CustomerDao().readAll());
-        getServletContext().getRequestDispatcher("/customerVehicle.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/customerVehicle.jsp").forward(request, response);
     }
 
     public static Integer getIntParameter(HttpServletRequest request, String parameterName) {

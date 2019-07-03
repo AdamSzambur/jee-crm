@@ -17,7 +17,7 @@ public class EmployeeDel extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer employeeId = getIntParameter(request,"employeeId");
+        Integer employeeId = getIntParameter(request, "employeeId");
         String msg;
         if (employeeId != null) {
             try {
@@ -26,7 +26,7 @@ public class EmployeeDel extends HttpServlet {
             } catch (RuntimeException ex) {
                 msg = ex.getMessage();
             }
-            response.sendRedirect(getServletContext().getContextPath()+"/employee/employeeList?msg="+msg);
+            response.sendRedirect(getServletContext().getContextPath() + "/employee/employeeList?msg=" + msg);
         }
     }
 

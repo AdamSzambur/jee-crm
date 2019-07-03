@@ -18,7 +18,7 @@ public class CustomerDel extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer customerId = getIntParameter(request,"customerId");
+        Integer customerId = getIntParameter(request, "customerId");
         String msg;
         if (customerId != null) {
             try {
@@ -27,7 +27,7 @@ public class CustomerDel extends HttpServlet {
             } catch (RuntimeException ex) {
                 msg = ex.getMessage();
             }
-            response.sendRedirect(getServletContext().getContextPath()+"/customer/customerList?msg="+msg);
+            response.sendRedirect(getServletContext().getContextPath() + "/customer/customerList?msg=" + msg);
         }
     }
 

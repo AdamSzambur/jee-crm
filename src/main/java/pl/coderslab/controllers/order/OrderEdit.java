@@ -116,9 +116,21 @@ public class OrderEdit extends HttpServlet {
         if (customerId != null) order.setCustomerId(customerId);
         if (vehicleId != null) order.setVehicleId(vehicleId);
         if (employeeId != null) order.setEmployeeId(employeeId);
-        if (!dateDeliveredToRepair.equals("")) { order.setDateDeliveredToRepair(dateDeliveredToRepair); } else {order.setDateDeliveredToRepair(null);}
-        if (!datePlannedRepair.equals("")) { order.setDatePlannedRepair(datePlannedRepair); } else {order.setDatePlannedRepair(null);}
-        if (!dateStartedRepair.equals("")) { order.setDateStartedRepair(dateStartedRepair); } else {order.setDateStartedRepair(null);}
+        if (!dateDeliveredToRepair.equals("")) {
+            order.setDateDeliveredToRepair(dateDeliveredToRepair);
+        } else {
+            order.setDateDeliveredToRepair(null);
+        }
+        if (!datePlannedRepair.equals("")) {
+            order.setDatePlannedRepair(datePlannedRepair);
+        } else {
+            order.setDatePlannedRepair(null);
+        }
+        if (!dateStartedRepair.equals("")) {
+            order.setDateStartedRepair(dateStartedRepair);
+        } else {
+            order.setDateStartedRepair(null);
+        }
         order.setProblemDescription(problemDescription);
         order.setRepairDescription(repairDescription);
         if (repairCostForCustommer != null) order.setRepairCostForCustommer(repairCostForCustommer);

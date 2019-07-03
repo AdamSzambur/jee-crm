@@ -14,11 +14,10 @@ import java.io.IOException;
 public class OrderDel extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer orderId = getIntParameter(request,"orderId");
+        Integer orderId = getIntParameter(request, "orderId");
         String msg;
         if (orderId != null) {
             try {
@@ -27,7 +26,7 @@ public class OrderDel extends HttpServlet {
             } catch (RuntimeException ex) {
                 msg = ex.getMessage();
             }
-            response.sendRedirect(getServletContext().getContextPath()+"/order/orderList?msg="+msg);
+            response.sendRedirect(getServletContext().getContextPath() + "/order/orderList?msg=" + msg);
         }
     }
 

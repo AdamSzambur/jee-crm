@@ -17,6 +17,6 @@ public class EmployeeList extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("employees", new EmployeeDao().readAll());
-        getServletContext().getRequestDispatcher("/employeeList.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/employeeList.jsp").forward(request, response);
     }
 }

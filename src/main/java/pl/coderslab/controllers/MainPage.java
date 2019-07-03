@@ -1,8 +1,6 @@
 package pl.coderslab.controllers;
 
-import pl.coderslab.db.dao.EmployeeDao;
 import pl.coderslab.db.dao.OrderDao;
-import pl.coderslab.db.dao.VehicleDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

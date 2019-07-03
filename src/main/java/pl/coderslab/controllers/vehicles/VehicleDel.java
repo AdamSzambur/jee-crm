@@ -17,8 +17,8 @@ public class VehicleDel extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer customerId = getIntParameter(request,"customerId");
-        Integer vehicleId = getIntParameter(request,"vehicleId");
+        Integer customerId = getIntParameter(request, "customerId");
+        Integer vehicleId = getIntParameter(request, "vehicleId");
         String msg;
         if (vehicleId != null) {
             try {
@@ -29,9 +29,9 @@ public class VehicleDel extends HttpServlet {
             }
 
             if (getCatalogueName(request).equals("customer")) {
-                response.sendRedirect(getServletContext().getContextPath()+"/customer/customerVehicle?msg="+msg+"&customerId="+customerId);
+                response.sendRedirect(getServletContext().getContextPath() + "/customer/customerVehicle?msg=" + msg + "&customerId=" + customerId);
             } else {
-                response.sendRedirect(getServletContext().getContextPath() + "/vehicle/vehicleList?msg="+ msg+"&customerId="+customerId);
+                response.sendRedirect(getServletContext().getContextPath() + "/vehicle/vehicleList?msg=" + msg + "&customerId=" + customerId);
             }
 
         }
@@ -47,7 +47,7 @@ public class VehicleDel extends HttpServlet {
 
     public static String getCatalogueName(HttpServletRequest request) {
         String[] uriTab = (request.getRequestURI().split("/"));
-        return uriTab[uriTab.length-2];
+        return uriTab[uriTab.length - 2];
     }
 
 }

@@ -38,7 +38,7 @@ public class CustomerOrder extends HttpServlet {
             request.setAttribute("orders", orders);
         }
 
-        if (statusId!=null) {
+        if (statusId != null) {
             request.setAttribute("statusId", statusId);
         }
 

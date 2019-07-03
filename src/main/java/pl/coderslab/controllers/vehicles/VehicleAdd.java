@@ -31,11 +31,13 @@ public class VehicleAdd extends HttpServlet {
         try {
             vehicle = new VehicleDao().create(vehicle);
             if (getCatalogueName(request).equals("customer")) {
-                response.sendRedirect(getServletContext().getContextPath() + "/customer/customerVehicle?msg=Dodano%20nowy%20pojazd&customerId="+customerId);
-            } if (getCatalogueName(request).equals("vehicle")){
-                response.sendRedirect(getServletContext().getContextPath() + "/vehicle/vehicleList?msg=Dodanow%20nowy%20pojazd&customerId="+customerId);
-            } if (getCatalogueName(request).equals("order")){
-                response.sendRedirect(getServletContext().getContextPath() + "/order/orderEdit?orderId="+orderId+"&customerId="+customerId+"&vehicleId="+ vehicle.getId());
+                response.sendRedirect(getServletContext().getContextPath() + "/customer/customerVehicle?msg=Dodano%20nowy%20pojazd&customerId=" + customerId);
+            }
+            if (getCatalogueName(request).equals("vehicle")) {
+                response.sendRedirect(getServletContext().getContextPath() + "/vehicle/vehicleList?msg=Dodanow%20nowy%20pojazd&customerId=" + customerId);
+            }
+            if (getCatalogueName(request).equals("order")) {
+                response.sendRedirect(getServletContext().getContextPath() + "/order/orderEdit?orderId=" + orderId + "&customerId=" + customerId + "&vehicleId=" + vehicle.getId());
             }
         } catch (RuntimeException ex) {
             request.setAttribute("customerId", customerId);

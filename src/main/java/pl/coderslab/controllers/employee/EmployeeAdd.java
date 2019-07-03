@@ -25,16 +25,16 @@ public class EmployeeAdd extends HttpServlet {
 
         try {
             new EmployeeDao().create(employee);
-            response.sendRedirect(getServletContext().getContextPath()+"/employee/employeeList?msg=Dodano%20nowego%20pracownika%20do%20listy");
-        } catch(RuntimeException ex){
-            request.setAttribute("employee",employee);
-            request.setAttribute("msg",ex.getMessage());
-            getServletContext().getRequestDispatcher("/employeeAdd.jsp").forward(request,response);
+            response.sendRedirect(getServletContext().getContextPath() + "/employee/employeeList?msg=Dodano%20nowego%20pracownika%20do%20listy");
+        } catch (RuntimeException ex) {
+            request.setAttribute("employee", employee);
+            request.setAttribute("msg", ex.getMessage());
+            getServletContext().getRequestDispatcher("/employeeAdd.jsp").forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/employeeAdd.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/employeeAdd.jsp").forward(request, response);
     }
 
 }

@@ -24,9 +24,9 @@ public class Statement extends HttpServlet {
         String dateFrom = request.getParameter("dateFrom");
         String dateTo = request.getParameter("dateTo");
 
-        if (dateFrom!=null) {
+        if (dateFrom != null) {
             try {
-                request.setAttribute("statementRows", new StatementDao().readDataForStatement(statement,dateFrom,dateTo));
+                request.setAttribute("statementRows", new StatementDao().readDataForStatement(statement, dateFrom, dateTo));
                 request.setAttribute("statementName", statementName);
                 request.setAttribute("dateFrom", dateFrom);
                 request.setAttribute("dateTo", dateTo);

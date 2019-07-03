@@ -24,11 +24,12 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customer` (
                             `id` int(11) NOT NULL AUTO_INCREMENT,
-                            `firstname` varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
-                            `lastname` varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
-                            `birth_date` timestamp NULL DEFAULT NULL,
+                            `firstname` varchar(45) DEFAULT NULL,
+                            `lastname` varchar(45) DEFAULT NULL,
+                            `birth_date` date DEFAULT NULL,
+                            `email` varchar(45) DEFAULT NULL,
                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +38,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Adam','Szamburski','1978-12-03 23:00:00'),(2,'Michał','Szamburski','1980-08-31 22:00:00');
+INSERT INTO `customer` VALUES (1,'Adam','Szamburski','1978-12-04','adamszamburski@gmail.com'),(3,'Agniesza','Szamburska','1981-02-12','agnieszka@gamil.com'),(5,'Michał','Szamburski','1980-09-01','michal@interia.pl');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,14 +51,14 @@ DROP TABLE IF EXISTS `employee`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `employee` (
                             `id` int(11) NOT NULL AUTO_INCREMENT,
-                            `firstname` varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
-                            `lastname` varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
-                            `address` varchar(250) COLLATE utf8_polish_ci DEFAULT NULL,
-                            `phone_number` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-                            `note` text COLLATE utf8_polish_ci,
+                            `firstname` varchar(45) DEFAULT NULL,
+                            `lastname` varchar(45) DEFAULT NULL,
+                            `address` varchar(250) DEFAULT NULL,
+                            `phone_number` varchar(45) DEFAULT NULL,
+                            `note` text,
                             `hour_cost` double DEFAULT NULL,
                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +67,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'Marek','Krzeszowski','Kąty Wrocławskie ul. Buraczana 13','662066932','Najlepszy kierownik na świecie',15);
+INSERT INTO `employee` VALUES (1,'Marek','Krzeszowski','Kąty Wrocławskie ul. Buraczana 13','662066932','Najlepszy kierownik na świecie.',15),(2,'Łukasz','Machowiak','Oborniki Śląskie','564789435','Laborant',17),(4,'Marta','Szkurłat','Opoczno ul. M.C.Skłodowskiej','666123456','',35),(11,'Adam','Szamburski','Przyjaźni 2','515106900','No i tutaj jakaś informacja na temat pracownika.',25),(12,'Agnieszka','Szamburska','Wrocław ul. Przyjaźni','500081008','',38);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,12 +80,12 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
                           `id` int(11) NOT NULL AUTO_INCREMENT,
-                          `date_delivered_to_repair` timestamp NULL DEFAULT NULL,
-                          `date_planned_repair` timestamp NULL DEFAULT NULL,
-                          `date_started_repair` timestamp NULL DEFAULT NULL,
+                          `date_delivered_to_repair` date DEFAULT NULL,
+                          `date_planned_repair` date DEFAULT NULL,
+                          `date_started_repair` date DEFAULT NULL,
                           `employee_id` int(11) DEFAULT NULL,
-                          `problem_description` text COLLATE utf8_polish_ci,
-                          `repair_description` text COLLATE utf8_polish_ci,
+                          `problem_description` text,
+                          `repair_description` text,
                           `status_id` int(11) DEFAULT NULL,
                           `vehicle_id` int(11) DEFAULT NULL,
                           `repair_cost_for_customer` double DEFAULT NULL,
@@ -96,7 +97,7 @@ CREATE TABLE `orders` (
                           KEY `fk_order_2_idx` (`employee_id`),
                           CONSTRAINT `fk_order_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
                           CONSTRAINT `fk_order_2` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +106,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (4,'2019-04-30 22:00:00','2019-05-31 22:00:00','2019-05-31 22:00:00',1,'Wymiana oleju','',3,1,0,0,15,0);
+INSERT INTO `orders` VALUES (4,'2019-05-01','2019-06-01','2019-06-01',2,'Olej i klocki','Wymiana oleju i klocków hamulcowych',3,1,3000,2345,17,5),(5,'2019-01-01','2019-01-01','2019-01-01',11,'Opony do wymiany','Wymienione opony',5,34,0,0,25,0);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,9 +119,9 @@ DROP TABLE IF EXISTS `status`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `status` (
                           `id` int(11) NOT NULL AUTO_INCREMENT,
-                          `value` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+                          `value` varchar(45) DEFAULT NULL,
                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,16 +143,16 @@ DROP TABLE IF EXISTS `vehicle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vehicle` (
                            `id` int(11) NOT NULL AUTO_INCREMENT,
-                           `model` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-                           `car_brand` varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
-                           `production_year` int(11) DEFAULT NULL,
-                           `registration_number` varchar(45) COLLATE utf8_polish_ci DEFAULT NULL,
-                           `next_technical_inspection` timestamp NULL DEFAULT NULL,
+                           `model` varchar(45) DEFAULT NULL,
+                           `car_brand` varchar(45) DEFAULT NULL,
+                           `production_year` varchar(4) DEFAULT NULL,
+                           `registration_number` varchar(45) DEFAULT NULL,
+                           `next_technical_inspection` date DEFAULT NULL,
                            `customer_id` int(11) DEFAULT NULL,
                            PRIMARY KEY (`id`),
                            KEY `fk_vehicle_1_idx` (`customer_id`),
                            CONSTRAINT `fk_vehicle_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +161,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES (1,'E46','BMW',2001,'DW 3455J','2019-10-10 22:00:00',1),(2,'A4','Audi',2018,'ETM 34564','2019-12-31 23:00:00',2);
+INSERT INTO `vehicle` VALUES (1,'E46','BMW','2003','DW 3455J','2020-10-11',1),(17,'A4','AUDI','2018','TM 3455j','2019-10-12',5),(21,'MODEO','FORD','2017','DW 3455J','2019-12-31',1),(28,'A6','AUDI','2019','TM 3455K','2019-01-01',5),(34,'Cooper','MINI','2019','DW 54321','2020-01-01',3);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -173,4 +174,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-18 20:14:08
+-- Dump completed on 2019-07-03 23:00:23

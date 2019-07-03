@@ -12,24 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/vehicle/vehicleOrder","/customer/vehicleOrder"})
+@WebServlet(urlPatterns = {"/vehicle/vehicleOrder", "/customer/vehicleOrder"})
 public class VehicleOrder extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer vehicleId = getIntParameter(request,"vehicleId");
+        Integer vehicleId = getIntParameter(request, "vehicleId");
 
-        if (vehicleId!=null) {
+        if (vehicleId != null) {
             request.setAttribute("vehicleId", vehicleId);
-            request.setAttribute("orders", new OrderDao<Integer>().readAllFor("vehicle",vehicleId));
+            request.setAttribute("orders", new OrderDao<Integer>().readAllFor("vehicle", vehicleId));
         } else {
             request.setAttribute("orders", new OrderDao().readAll());
         }
         request.setAttribute("statusList", new StatusDao().readAll());
         request.setAttribute("vehicleList", new VehicleDao().readAll());
-        getServletContext().getRequestDispatcher("/vehicleOrder.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/vehicleOrder.jsp").forward(request, response);
     }
 
 

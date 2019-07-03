@@ -23,7 +23,7 @@ public class VehicleEdit extends HttpServlet {
         String registrationNumber = request.getParameter("registrationNumber");
         String nextTechnicalInspection = request.getParameter("nextTechnicalInspection");
         Integer vehicleCustomerId = getIntParameter(request,"vehicleCustomerId");
-        Integer customerId = getIntParameter(request,"customerId");
+        Integer customerId = getIntParameter(request, "customerId");
         Vehicle vehicle = new Vehicle(model,carBrand,productionYear,registrationNumber,nextTechnicalInspection,vehicleCustomerId);
         vehicle.setId(id);
 

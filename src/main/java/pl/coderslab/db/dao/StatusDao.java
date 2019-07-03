@@ -1,6 +1,8 @@
 package pl.coderslab.db.dao;
+
 import pl.coderslab.db.DbUtil;
 import pl.coderslab.db.models.Status;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

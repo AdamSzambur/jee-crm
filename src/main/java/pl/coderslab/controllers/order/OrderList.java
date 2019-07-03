@@ -24,6 +24,6 @@ public class OrderList extends HttpServlet {
         } else {
             request.setAttribute("orders", new OrderDao().readAll());
         }
-        getServletContext().getRequestDispatcher("/orderList.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/orderList.jsp").forward(request, response);
     }
 }

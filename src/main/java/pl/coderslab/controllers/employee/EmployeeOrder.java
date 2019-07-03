@@ -20,32 +20,32 @@ public class EmployeeOrder extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer employeeId = getIntParameter(request,"employeeId");
-        Integer statusId = getIntParameter(request,"statusId");
+        Integer employeeId = getIntParameter(request, "employeeId");
+        Integer statusId = getIntParameter(request, "statusId");
         List<Order> orders;
 
-        if (employeeId!=null) {
+        if (employeeId != null) {
             request.setAttribute("employeeId", employeeId);
-            orders = new OrderDao<Integer>().readAllFor("employee",employeeId);
-            leaveOnlyOrdersWithStatus(orders,statusId);
+            orders = new OrderDao<Integer>().readAllFor("employee", employeeId);
+            leaveOnlyOrdersWithStatus(orders, statusId);
             request.setAttribute("orders", orders);
         } else {
             orders = new OrderDao<Integer>().readAll();
-            leaveOnlyOrdersWithStatus(orders,statusId);
+            leaveOnlyOrdersWithStatus(orders, statusId);
             request.setAttribute("orders", orders);
         }
 
-        if (statusId!=null) {
+        if (statusId != null) {
             request.setAttribute("statusId", statusId);
         }
 
         request.setAttribute("statusList", new StatusDao().readAll());
         request.setAttribute("employeeList", new EmployeeDao().readAll());
-        getServletContext().getRequestDispatcher("/employeeOrder.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/employeeOrder.jsp").forward(request, response);
     }
 
     private void leaveOnlyOrdersWithStatus(List<Order> orders, Integer statusId) {
-        if (statusId!= null) {
+        if (statusId != null) {
             orders.removeIf(order -> order.getStatusId() != statusId);
         }
     }

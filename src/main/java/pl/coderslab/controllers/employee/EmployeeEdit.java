@@ -27,21 +27,21 @@ public class EmployeeEdit extends HttpServlet {
 
         try {
             new EmployeeDao().update(employee);
-            response.sendRedirect(getServletContext().getContextPath()+"/employee/employeeList?msg=Zaktulizowano%20dane%20pracownika");
-        } catch(RuntimeException ex){
-            request.setAttribute("msg",ex.getMessage());
-            request.setAttribute("employee",employee);
-            getServletContext().getRequestDispatcher("/employeeEdit.jsp").forward(request,response);
+            response.sendRedirect(getServletContext().getContextPath() + "/employee/employeeList?msg=Zaktulizowano%20dane%20pracownika");
+        } catch (RuntimeException ex) {
+            request.setAttribute("msg", ex.getMessage());
+            request.setAttribute("employee", employee);
+            getServletContext().getRequestDispatcher("/employeeEdit.jsp").forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       Integer employeeId = getIntParameter(request,"employeeId");
+        Integer employeeId = getIntParameter(request, "employeeId");
 
-       if (employeeId!=null) {
-           request.setAttribute("employee", new EmployeeDao().read(employeeId));
-           getServletContext().getRequestDispatcher("/employeeEdit.jsp").forward(request,response);
-       }
+        if (employeeId != null) {
+            request.setAttribute("employee", new EmployeeDao().read(employeeId));
+            getServletContext().getRequestDispatcher("/employeeEdit.jsp").forward(request, response);
+        }
 
     }
 
