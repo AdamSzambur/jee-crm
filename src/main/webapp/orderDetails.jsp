@@ -17,93 +17,79 @@
 
         <div class="rounded border p-5">
 
-        <h4 class="cover-heading">Szczegóły zlecenia</h4>
-        <p>
-        <form style="text-align: left">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="status">Status zlecenia</label>
-                    <div class="input-group" id="status">
-                        <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                            <c:forEach items="${statusList}" var="status">
-                                <option value="${status.id}" <c:if test="${status.id == order.statusId}">selected</c:if> >${status.value}</option>
-                            </c:forEach>
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Zmień</button>
+            <h4 class="cover-heading">Szczegóły zlecenia</h4>
+            <p>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="status">Status zlecenia</label>
+                        <div class="input-group" id="status">
+                            <input readonly class="form-control" type="text" value="${order.statusValue}">
                         </div>
                     </div>
-            </div>
-            </div>
-
-            Klient
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    <select id="clientSelect" class="custom-select" aria-label="Imie i nazwisko klienta">
-                        <option value=""></option>
-                        <c:forEach items="${customerList}" var="customer">
-                            <option value="${customer.id}" <c:if test="${customer.id == customerId}">selected</c:if> >${customer.firstName} ${customer.lastName}</option>
-                        </c:forEach>
-                    </select>
                 </div>
-            </div>
-            Samochód [marka/model / numer rejestracyjny]
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    <select id="vehicleSelect" class="custom-select" aria-label="Marka i model pojazdu">
-                        <option value=""></option>
-                        <c:forEach items="${vehicleList}" var="vehicle">
-                            <option value="${vehicle.id}" <c:if test="${vehicle.id == order.vehicleId}">selected</c:if> >${vehicle.carBrand} ${vehicle.model} ${vehicle.registrationNumber}</option>
-                        </c:forEach>
-                    </select>
+                Klient
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="input-group">
+                            <input readonly type="text" class="form-control" value="${order.customerFirstName} ${order.customerLastName}">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <br>
-            Data [dostarczenia / planowanej naprawy / rozpoczęcia naprawy]
-            <div class="input-group">
-                <input type="text"  class="form-control" placeholder="Data dostarczenia" value="${order.dateDeliveredToRepair}">
-                <input type="text" class="form-control" placeholder="Data planowanej naprawy" value="${order.datePlannedRepair}">
-                <input type="text" class="form-control" placeholder="Data rozpoczęcia naprawy" value="${order.dateStartedRepair}">
-            </div>
-            <br>
-
-            Pracownik
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <select id="employeeSelect" class="custom-select" aria-label="Imie i nazwisko pracownika">
-                        <option value=""></option>
-                        <c:forEach items="${employeeList}" var="employee">
-                            <option value="${employee.id}" <c:if test="${employee.id == order.employeeId}">selected</c:if> >${employee.firstName} ${employee.lastName}</option>
-                        </c:forEach>
-                    </select>
+                Samochód [marka/model / numer rejestracyjny]
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="input-group">
+                            <input readonly type="text" class="form-control" value="${order.carBrand} ${order.model} ${order.registrationNumber}">
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            Opis awarii
-            <div class="form-group">
-                <textarea class="form-control" placeholder="Opis problemu / awarii" rows="3">${order.problemDescription}</textarea>
-            </div>
-
-            Opis naprawy
-            <div class="form-group">
-                <textarea class="form-control" placeholder="Opis problemu / awarii" rows="3">${order.repairDescription}</textarea>
-            </div>
-
-            Koszt warsztatu [części / koszt roboczogodziny / liczba roboczogodzin]
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Koszt części" value="${order.costOfParts}">
-                <input id="costOfmanHour" type="text" class="form-control" placeholder="Koszt roboczogodziny" value="${order.costOfmanHour}">
-                <input type="text" class="form-control" placeholder="Liczba roboczogodzin" value="${order.manHour}">
-            </div>
-            <br>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="costCustomer">Koszt naprawy dla klienta</label>
-                    <input type="text" class="form-control" placeholder="Koszt dla klienta" id="costCustomer" value="${order.repairCostForCustommer}">
+                Data [dostarczenia / planowanej naprawy / rozpoczęcia naprawy]
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="input-group">
+                            <input readonly name="dateDeliveredToRepair" type="date"  class="form-control" placeholder="Data dostarczenia" value="${order.dateDeliveredToRepair}">
+                            <input readonly name="datePlannedRepair" type="date" class="form-control" placeholder="Data planowanej naprawy" value="${order.datePlannedRepair}">
+                            <input readonly name="dateStartedRepair" type="date" class="form-control" placeholder="Data rozpoczęcia naprawy" value="${order.dateStartedRepair}">
+                        </div>
+                    </div>
                 </div>
-
-            </div>
-        </form>
+                Pracownik
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <div class="input-group">
+                            <input readonly type="text" class="form-control" value="${order.employeeFirstName} ${order.employeeLastName}">
+                        </div>
+                    </div>
+                </div>
+                Opis awarii
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <textarea readonly name="problemDescription" class="form-control" placeholder="Opis problemu / awarii" rows="3">${order.problemDescription}</textarea>
+                    </div>
+                </div>
+                Opis naprawy
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <textarea readonly name="repairDescription" class="form-control" placeholder="Opis problemu / awarii" rows="3">${order.repairDescription}</textarea>
+                    </div>
+                </div>
+                Koszt warsztatu [części / koszt roboczogodziny / liczba roboczogodzin]
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="input-group">
+                            <input readonly name="costOfParts" type="text" class="form-control" placeholder="Koszt części" value="${order.costOfParts}">
+                            <input readonly name="costOfmanHour" id="costOfmanHour" type="text" class="form-control" placeholder="Koszt roboczogodziny" value="${order.costOfmanHour}">
+                            <input readonly name="manHour" type="text" class="form-control" placeholder="Liczba roboczogodzin" value="${order.manHour}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="costCustomer">Koszt naprawy dla klienta</label>
+                        <input  readonly name="repairCostForCustommer" type="text" class="form-control" placeholder="Koszt dla klienta" id="costCustomer" value="${order.repairCostForCustommer}">
+                    </div>
+                </div>
         </div>
         </p>
     </div>

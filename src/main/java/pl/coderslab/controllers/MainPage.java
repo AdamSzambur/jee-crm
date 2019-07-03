@@ -18,9 +18,6 @@ public class MainPage extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        System.out.println("test");
-
         // pobieramy zamowienia aktualnie realizowane Status 'W naprawie'
         request.setAttribute("orders", new OrderDao<Integer>().readAllFor("status",3));
         getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);

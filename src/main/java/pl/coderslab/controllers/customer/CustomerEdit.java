@@ -18,7 +18,8 @@ public class CustomerEdit extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String birthDate = request.getParameter("birthDate");
-        Customer customer = new Customer(firstName, lastName, birthDate);
+        String email = request.getParameter("email");
+        Customer customer = new Customer(firstName, lastName, birthDate, email);
         customer.setId(id);
 
         try {

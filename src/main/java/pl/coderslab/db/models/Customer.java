@@ -5,14 +5,24 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String birthDate;
+    private String email;
 
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, String birthDate) {
+    public Customer(String firstName, String lastName, String birthDate, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getId() {

@@ -10,11 +10,11 @@ import java.util.List;
 public class CustomerDao {
 
     private static final String CREATE_QUERY =
-            "INSERT INTO customer(firstname, lastname, birth_date) VALUES (?, ?, ?)";
+            "INSERT INTO customer(firstname, lastname, birth_date, email) VALUES (?, ?, ?, ?)";
     private static final String READ_QUERY =
             "SELECT * FROM customer WHERE id = ?";
     private static final String UPDATE_QUERY =
-            "UPDATE customer SET firstname = ?, lastname = ?, birth_date = ? where id = ?";
+            "UPDATE customer SET firstname = ?, lastname = ?, birth_date = ?, email = ? where id = ?";
     private static final String DELETE_QUERY =
             "DELETE FROM customer WHERE id = ?";
 
@@ -27,6 +27,7 @@ public class CustomerDao {
             statement.setString(1, customer.getFirstName());
             statement.setString(2, customer.getLastName());
             statement.setString(3, customer.getBirthDate());
+            statement.setString(4, customer.getEmail());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -50,6 +51,7 @@ public class CustomerDao {
                 customer.setFirstName(resultSet.getString("firstname"));
                 customer.setLastName(resultSet.getString("lastname"));
                 customer.setBirthDate(resultSet.getString("birth_date"));
+                customer.setEmail(resultSet.getString("email"));
                 return customer;
             }
         } catch (SQLException ex) {
@@ -65,7 +67,8 @@ public class CustomerDao {
             statement.setString(1, customer.getFirstName());
             statement.setString(2, customer.getLastName());
             statement.setString(3, customer.getBirthDate());
-            statement.setInt(4, customer.getId());
+            statement.setString(4, customer.getEmail());
+            statement.setInt(5, customer.getId());
             statement.executeUpdate();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -96,6 +99,7 @@ public class CustomerDao {
                 customer.setFirstName(resultSet.getString("firstname"));
                 customer.setLastName(resultSet.getString("lastname"));
                 customer.setBirthDate(resultSet.getString("birth_date"));
+                customer.setEmail(resultSet.getString("email"));
                 customers.add(customer);
             }
             return customers;

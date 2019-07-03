@@ -36,6 +36,12 @@
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" placeholder="Adres email" name="email" id="email" value="${customer.email}">
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-12">
                         <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
                     </div>

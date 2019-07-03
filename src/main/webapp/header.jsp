@@ -11,53 +11,8 @@
     <title>Warsztat samochodowy</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        main > .container {
-            padding: 60px 15px 0;
-        }
-
-        .footer {
-            background-color: #f5f5f5;
-        }
-
-        .footer > .container {
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-
-        code {
-            font-size: 80%;
-        }
-
-        .modal {
-            display: inline;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            padding-top: 10px; 
-            width: 400px;
-            height: 150px;
-            overflow: auto;
-        }
-    </style>
     <script src="https://kit.fontawesome.com/da6d9e6874.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css"/>
 </head>
 <body class="d-flex flex-column h-100">
 <header>
@@ -114,13 +69,12 @@
                 </li>
 
                 <li class="nav-item dropdown" >
-                    <a class="nav-link dropdown-toggle <c:if test="${cat == 'sheet'}">active</c:if>" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle <c:if test="${cat == 'statement'}">active</c:if>" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-sort-amount-up-alt"></i> Zestawienia
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/statement/Statement?statement=StatementEmployeeHours&statementName=Liczba%20przepracowanych%20godzin%20przez%20pracownikow">Liczba przepracowanych godzin</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/statement/Statement?statement=StatementProfit&statementName=Zyski%20NETTO%20z%20dzialalnosci">Zysk NETTO z działalności</a>
                     </div>
                 </li>
             </ul>

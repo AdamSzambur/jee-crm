@@ -20,26 +20,11 @@ public class OrderDetails extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer orderId = getIntParameter(request,"orderId");
         if (orderId != null) {
-            Order order = new OrderDao().read(orderId);
-            int customerId = new VehicleDao().read(order.getVehicleId()).getCustomerId();
-
-            List<Vehicle> vehicleList = new VehicleDao().readAll();
-            List<Employee> employeeList = new EmployeeDao().readAll();
-            List<Status> statusList = new StatusDao().readAll();
-            List<Customer> customerList = new CustomerDao().readAll();
-
-            request.setAttribute("order", order);
-            request.setAttribute("customerId", customerId);
-
-            request.setAttribute("employeeList", employeeList);
-            request.setAttribute("statusList", statusList);
-            request.setAttribute("vehicleList", vehicleList);
-            request.setAttribute("customerList", customerList);
-
+            request.setAttribute("order", new OrderDao().read(orderId));
             getServletContext().getRequestDispatcher("/orderDetails.jsp").forward(request,response);
         } else {
             request.setAttribute("msg", "Błąd : Nie podano indeksu zlecenia.");
-            request.setAttribute("orders", new OrderDao().readAllFor("status_id",3));
+            request.setAttribute("orders", new OrderDao<Integer>().readAllFor("status_id",3));
             getServletContext().getRequestDispatcher("/mainPage.jsp").forward(request,response);
         }
     }

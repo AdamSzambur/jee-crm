@@ -18,12 +18,20 @@
             <form action="${pageContext.request.contextPath}/customer/customerOrder" method="get">
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <select id="customerId" class="custom-select" onchange="this.form.submit()" name="customerId">
-                            <option value="">Wszyscy klienci</option>
-                            <c:forEach items="${customerList}" var="customer">
-                                <option value="${customer.id}" <c:if test="${customer.id == customerId}">selected</c:if> >${customer.firstName} ${customer.lastName}</option>
-                            </c:forEach>
-                        </select>
+                        <div class="input-group">
+                            <select id="customerId" class="custom-select" onchange="this.form.submit()" name="customerId">
+                                <option value="">Wszyscy klienci</option>
+                                <c:forEach items="${customerList}" var="customer">
+                                    <option value="${customer.id}" <c:if test="${customer.id == customerId}">selected</c:if> >${customer.firstName} ${customer.lastName}</option>
+                                </c:forEach>
+                            </select>
+                            <select id="statusId" class="custom-select" onchange="this.form.submit()" name="statusId">
+                                <option value="">Wszyskie statusy</option>
+                                <c:forEach items="${statusList}" var="status">
+                                    <option value="${status.id}" <c:if test="${status.id == statusId}">selected</c:if> >${status.value}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </form>

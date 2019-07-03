@@ -18,12 +18,20 @@
             <form action="${pageContext.request.contextPath}/employee/employeeOrder" method="get">
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <select id="employeeId" class="custom-select" onchange="this.form.submit()" name="employeeId">
-                            <option value="">Wszyscy pracownicy</option>
-                            <c:forEach items="${employeeList}" var="employee">
-                                <option value="${employee.id}" <c:if test="${employee.id == employeeId}">selected</c:if> >${employee.firstName} ${employee.lastName}</option>
-                            </c:forEach>
-                        </select>
+                        <div class="input-group">
+                            <select id="employeeId" class="custom-select" onchange="this.form.submit()" name="employeeId">
+                                <option value="">Wszyscy pracownicy</option>
+                                <c:forEach items="${employeeList}" var="employee">
+                                    <option value="${employee.id}" <c:if test="${employee.id == employeeId}">selected</c:if> >${employee.firstName} ${employee.lastName}</option>
+                                </c:forEach>
+                            </select>
+                            <select id="statusId" class="custom-select" onchange="this.form.submit()" name="statusId">
+                                <option value="">Wszyskie statusy</option>
+                                <c:forEach items="${statusList}" var="status">
+                                    <option value="${status.id}" <c:if test="${status.id == statusId}">selected</c:if> >${status.value}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </form>

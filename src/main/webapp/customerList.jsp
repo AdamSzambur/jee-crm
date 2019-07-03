@@ -38,6 +38,7 @@
                 <th scope="col">Imię</th>
                 <th scope="col">Nazwisko</th>
                 <th scope="col">Data urodzenia</th>
+                <th scope="col">E-mail</th>
                 <th scope="col">Akcja</th>
             </tr>
             </thead>
@@ -49,6 +50,7 @@
                     <td>${customer.firstName}</td>
                     <td>${customer.lastName}</td>
                     <td>${customer.birthDate}</td>
+                    <td>${customer.email}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="First group">
                             <button type="button" class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/customer/customerEdit?customerId=${customer.id}'">Edytuj</button>
