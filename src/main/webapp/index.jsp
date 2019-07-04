@@ -5,14 +5,42 @@
     <br>
     <div class="container">
         <%--        message from servlet--%>
-        <c:if test="${msg!=null}">
+        <c:if test="${param.msg!=null}">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    ${msg}
+                    ${param.msg}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         </c:if>
+            <c:forEach items="${birthdayList}" var="birthday">
+                <form action="${pageContext.request.contextPath}/sendNotify" method="post">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="submit" class="btn btn-success"><i class="far fa-envelope"></i> Wyślij</button>
+                        życzenia urodzinowe do klienta ${birthday.firstName} ${birthday.lastName}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="id" value="${birthday.id}">
+                    <input type="hidden" name="table" value="customer">
+                </form>
+            </c:forEach>
+
+            <c:forEach items="${inspectionList}" var="inspection">
+                <form action="${pageContext.request.contextPath}/sendNotify" method="post">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Wyślij</button>
+                        przypomnienie o inspekcji dla ${inspection.carBrand} ${inspection.model} ${inspection.registrationNumber}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="id" value="${inspection.id}">
+                    <input type="hidden" name="table" value="vehicle">
+                </form>
+            </c:forEach>
+
         <br>
         <h4 class="cover-heading">Aktualne zlecenia </h4>
         <p>

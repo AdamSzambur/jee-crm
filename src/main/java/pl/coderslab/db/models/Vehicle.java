@@ -8,6 +8,7 @@ public class Vehicle {
     private String registrationNumber;
     private String nextTechnicalInspection;
     private int customerId;
+    private String inspectionNotify;
 
     public Vehicle() {
     }
@@ -19,6 +20,14 @@ public class Vehicle {
         this.registrationNumber = registrationNumber;
         this.nextTechnicalInspection = nextTechnicalInspection;
         this.customerId = customerId;
+    }
+
+    public String getInspectionNotify() {
+        return inspectionNotify;
+    }
+
+    public void setInspectionNotify(String inspectionNotify) {
+        this.inspectionNotify = inspectionNotify;
     }
 
     public int getId() {

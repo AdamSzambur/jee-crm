@@ -58,7 +58,6 @@
                             pojazdów</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/vehicle/vehicleAdd">Dodaj
                             pojazd</a>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/vehicle/vehicleSendMail">Wyslij maila</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

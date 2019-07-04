@@ -28,8 +28,9 @@ CREATE TABLE `customer` (
                             `lastname` varchar(45) DEFAULT NULL,
                             `birth_date` date DEFAULT NULL,
                             `email` varchar(45) DEFAULT NULL,
+                            `birth_date_notify` date DEFAULT NULL,
                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +39,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Adam','Szamburski','1978-12-04','adamszamburski@gmail.com'),(3,'Agniesza','Szamburska','1981-02-12','agnieszka@gamil.com'),(5,'Michał','Szamburski','1980-09-01','michal@interia.pl');
+INSERT INTO `customer` VALUES (1,'Adam','Szamburski','1978-07-04','adamszamburski@gmail.com','2019-07-04'),(3,'Agnieszka','Szamburska','1981-02-12','agnieszka@gamil.com',NULL),(5,'Michał','Szamburski','2019-07-04','michal@interia.pl',NULL),(6,'Marcin','Szamburski','2019-07-04','marcin@o2.pl','2019-07-04');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,6 +150,7 @@ CREATE TABLE `vehicle` (
                            `registration_number` varchar(45) DEFAULT NULL,
                            `next_technical_inspection` date DEFAULT NULL,
                            `customer_id` int(11) DEFAULT NULL,
+                           `inspection_notify` varchar(45) DEFAULT NULL,
                            PRIMARY KEY (`id`),
                            KEY `fk_vehicle_1_idx` (`customer_id`),
                            CONSTRAINT `fk_vehicle_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -161,7 +163,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES (1,'E46','BMW','2003','DW 3455J','2020-10-11',1),(17,'A4','AUDI','2018','TM 3455j','2019-10-12',5),(21,'MODEO','FORD','2017','DW 3455J','2019-12-31',1),(28,'A6','AUDI','2019','TM 3455K','2019-01-01',5),(34,'Cooper','MINI','2019','DW 54321','2020-01-01',3);
+INSERT INTO `vehicle` VALUES (1,'E46','BMW','2003','DW 3455J','2019-07-11',1,'2019-07-11'),(17,'A4','AUDI','2018','TM 3455j','2019-10-12',5,NULL),(21,'MODEO','FORD','2017','DW 3455J','2019-12-31',1,NULL),(28,'A6','AUDI','2019','TM 3455K','2019-01-01',5,NULL),(34,'Cooper','MINI','2019','DW 54321','2020-01-01',3,NULL);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -174,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-03 23:00:23
+-- Dump completed on 2019-07-04 17:19:13

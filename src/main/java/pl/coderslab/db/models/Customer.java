@@ -6,6 +6,7 @@ public class Customer {
     private String lastName;
     private String birthDate;
     private String email;
+    private String birthDateNotify;
 
     public Customer() {
     }
@@ -15,6 +16,14 @@ public class Customer {
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.email = email;
+    }
+
+    public String getBirthDateNotify() {
+        return birthDateNotify;
+    }
+
+    public void setBirthDateNotify(String birthDateNotify) {
+        this.birthDateNotify = birthDateNotify;
     }
 
     public String getEmail() {
