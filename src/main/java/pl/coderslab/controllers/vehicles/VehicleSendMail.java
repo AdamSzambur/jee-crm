@@ -20,24 +20,23 @@ public class VehicleSendMail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Dziala ale na razie nie będę tego uruchamiał :)
-
-//        try {
-//            sendEmail();
-//        } catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//        }
+        try {
+            sendEmail();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void sendEmail() throws Exception {
-        String smtpServer = "poczta.o2.pl";
-        int port = 587;
-        final String userid = "testdzialania";//change accordingly
-        final String password = "Fibonacci123!";//change accordingly
+        String smtpServer = getServletContext().getInitParameter("smtpServer");
+        int port = Integer.parseInt(getServletContext().getInitParameter("port"));
+        String userid = getServletContext().getInitParameter("userEmail");
+        String password = getServletContext().getInitParameter("password");
         String contentType = "text/html";
         String subject = "test: testujemy wysyłanie maila";
-        String from = "szambur@o2.pl";
-        String to = "adam.szamburski@gmail.com";//some invalid address
-        String bounceAddr = "testdzialania@o2.pl";//change accordingly
+        String from = getServletContext().getInitParameter("userEmail");
+        String to = "szambur@o2.pl";//some invalid address
+        String bounceAddr = getServletContext().getInitParameter("userEmail");
         String body = "To jest testowa wiadomość wysłana z servleta";
 
         Properties props = new Properties();
