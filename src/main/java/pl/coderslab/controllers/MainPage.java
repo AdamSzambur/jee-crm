@@ -25,7 +25,7 @@ public class MainPage extends HttpServlet {
         request.setAttribute("birthdayList", new CustomerDao().birthDateNotify());
 
         // pobieramy zamowienia aktualnie realizowane Status 'W naprawie'
-        request.setAttribute("orders", new OrderDao<Integer>().readAllFor("status",3));
+        request.setAttribute("orders", new OrderDao().readAllFor("status",3));
         getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
     }
 }

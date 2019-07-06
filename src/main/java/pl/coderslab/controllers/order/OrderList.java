@@ -20,7 +20,7 @@ public class OrderList extends HttpServlet {
         String filter = request.getParameter("filter");
         if (filter != null) {
             request.setAttribute("filter", filter);
-            request.setAttribute("orders", new OrderDao<String>().readAllFor("filter", filter));
+            request.setAttribute("orders", new OrderDao().readAllFor("filter", filter));
         } else {
             request.setAttribute("orders", new OrderDao().readAll());
         }

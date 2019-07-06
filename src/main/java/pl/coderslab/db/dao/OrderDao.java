@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDao<T> {
+public class OrderDao {
     private static final String CREATE_QUERY =
             "INSERT INTO orders(date_delivered_to_repair, date_planned_repair, date_started_repair, employee_id, problem_description, repair_description, status_id, vehicle_id, repair_cost_for_customer, cost_of_parts, cost_of_man_hour, man_hour) VALUES (?, ?, ?, ? , ?, ?,?,?,?,?,?,?)";
     private static final String READ_QUERY =
@@ -133,7 +133,7 @@ public class OrderDao<T> {
     }
 
 
-    public List<Order> readAllFor(String caseName, T caseValue) {
+    public <T> List<Order> readAllFor(String caseName, T caseValue) {
         try (Connection conn = DbUtil.getConnection()) {
             List<Order> orders = new ArrayList<>();
 

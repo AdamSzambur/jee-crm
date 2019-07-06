@@ -26,11 +26,11 @@ public class EmployeeOrder extends HttpServlet {
 
         if (employeeId != null) {
             request.setAttribute("employeeId", employeeId);
-            orders = new OrderDao<Integer>().readAllFor("employee", employeeId);
+            orders = new OrderDao().readAllFor("employee", employeeId);
             leaveOnlyOrdersWithStatus(orders, statusId);
             request.setAttribute("orders", orders);
         } else {
-            orders = new OrderDao<Integer>().readAll();
+            orders = new OrderDao().readAll();
             leaveOnlyOrdersWithStatus(orders, statusId);
             request.setAttribute("orders", orders);
         }

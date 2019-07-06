@@ -23,7 +23,7 @@ public class VehicleOrder extends HttpServlet {
 
         if (vehicleId != null) {
             request.setAttribute("vehicleId", vehicleId);
-            request.setAttribute("orders", new OrderDao<Integer>().readAllFor("vehicle", vehicleId));
+            request.setAttribute("orders", new OrderDao().readAllFor("vehicle", vehicleId));
         } else {
             request.setAttribute("orders", new OrderDao().readAll());
         }

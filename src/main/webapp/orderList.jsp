@@ -30,8 +30,15 @@
         </div>
 
         <br>
-        <h4 class="cover-heading">Aktualne zlecenia </h4>
 
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <h4 class="cover-heading">Aktualne zlecenia</h4>
+            </div>
+            <div class="form-group col-md-4" style="text-align: right">
+                <button class="btn btn-primary" type="button" onclick="window.location.href='${pageContext.request.contextPath}/order/orderAdd'">Dodaj nowe zlecenie</button>
+            </div>
+        </div>
             <form method="get" action="${pageContext.request.contextPath}/order/orderList">
                 <div class="input-group mb-3" >
                     <input name="filter" id="filter" type="text" class="form-control" <c:if test="${not empty filter}">value="${filter}"</c:if> placeholder="Podaj szukaną frazę w tablicy zleceń" aria-label="Podaj szukaną frazę w tablicy zleceń" aria-describedby="button-addon2">

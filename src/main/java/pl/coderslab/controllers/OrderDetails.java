@@ -24,7 +24,7 @@ public class OrderDetails extends HttpServlet {
             getServletContext().getRequestDispatcher("/orderDetails.jsp").forward(request,response);
         } else {
             request.setAttribute("msg", "Błąd : Nie podano indeksu zlecenia.");
-            request.setAttribute("orders", new OrderDao<Integer>().readAllFor("status_id",3));
+            request.setAttribute("orders", new OrderDao().readAllFor("status_id",3));
             getServletContext().getRequestDispatcher("/mainPage.jsp").forward(request,response);
         }
     }
