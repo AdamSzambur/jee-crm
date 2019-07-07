@@ -53,15 +53,7 @@ public class VehicleDao {
             statement.setInt(1, vehicleId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Vehicle vehicle = new Vehicle();
-                vehicle.setId(resultSet.getInt("id"));
-                vehicle.setModel(resultSet.getString("model"));
-                vehicle.setCarBrand(resultSet.getString("car_brand"));
-                vehicle.setProductionYear(resultSet.getString("production_year"));
-                vehicle.setRegistrationNumber(resultSet.getString("registration_number"));
-                vehicle.setNextTechnicalInspection(resultSet.getString("next_technical_inspection"));
-                vehicle.setCustomerId(resultSet.getInt("customer_id"));
-                vehicle.setInspectionNotify(resultSet.getString("inspection_notify"));
+                Vehicle vehicle = getVehicle(resultSet);
                 return vehicle;
             }
         } catch (SQLException ex) {
@@ -69,6 +61,19 @@ public class VehicleDao {
             throw new RuntimeException(ex.getMessage());
         }
         return null;
+    }
+
+    private Vehicle getVehicle(ResultSet resultSet) throws SQLException {
+        Vehicle vehicle = new Vehicle();
+        vehicle.setId(resultSet.getInt("id"));
+        vehicle.setModel(resultSet.getString("model"));
+        vehicle.setCarBrand(resultSet.getString("car_brand"));
+        vehicle.setProductionYear(resultSet.getString("production_year"));
+        vehicle.setRegistrationNumber(resultSet.getString("registration_number"));
+        vehicle.setNextTechnicalInspection(resultSet.getString("next_technical_inspection"));
+        vehicle.setCustomerId(resultSet.getInt("customer_id"));
+        vehicle.setInspectionNotify(resultSet.getString("inspection_notify"));
+        return vehicle;
     }
 
     public void update(Vehicle vehicle) {
@@ -107,15 +112,7 @@ public class VehicleDao {
             statement.setInt(1, customerId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Vehicle vehicle = new Vehicle();
-                vehicle.setId(resultSet.getInt("id"));
-                vehicle.setModel(resultSet.getString("model"));
-                vehicle.setCarBrand(resultSet.getString("car_brand"));
-                vehicle.setProductionYear(resultSet.getString("production_year"));
-                vehicle.setRegistrationNumber(resultSet.getString("registration_number"));
-                vehicle.setNextTechnicalInspection(resultSet.getString("next_technical_inspection"));
-                vehicle.setCustomerId(resultSet.getInt("customer_id"));
-                vehicle.setInspectionNotify(resultSet.getString("inspection_notify"));
+                Vehicle vehicle = getVehicle(resultSet);
                 vehicles.add(vehicle);
             }
             return vehicles;
@@ -131,15 +128,7 @@ public class VehicleDao {
             PreparedStatement statement = conn.prepareStatement(READ_ALL_QUERY);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Vehicle vehicle = new Vehicle();
-                vehicle.setId(resultSet.getInt("id"));
-                vehicle.setModel(resultSet.getString("model"));
-                vehicle.setCarBrand(resultSet.getString("car_brand"));
-                vehicle.setProductionYear(resultSet.getString("production_year"));
-                vehicle.setRegistrationNumber(resultSet.getString("registration_number"));
-                vehicle.setNextTechnicalInspection(resultSet.getString("next_technical_inspection"));
-                vehicle.setCustomerId(resultSet.getInt("customer_id"));
-                vehicle.setInspectionNotify(resultSet.getString("inspection_notify"));
+                Vehicle vehicle = getVehicle(resultSet);
                 vehicles.add(vehicle);
             }
             return vehicles;
@@ -155,15 +144,7 @@ public class VehicleDao {
             PreparedStatement statement = conn.prepareStatement(TECHNICAL_INSPECTION_NOTIFY_QUERY);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Vehicle vehicle = new Vehicle();
-                vehicle.setId(resultSet.getInt("id"));
-                vehicle.setModel(resultSet.getString("model"));
-                vehicle.setCarBrand(resultSet.getString("car_brand"));
-                vehicle.setProductionYear(resultSet.getString("production_year"));
-                vehicle.setRegistrationNumber(resultSet.getString("registration_number"));
-                vehicle.setNextTechnicalInspection(resultSet.getString("next_technical_inspection"));
-                vehicle.setCustomerId(resultSet.getInt("customer_id"));
-                vehicle.setInspectionNotify(resultSet.getString("inspection_notify"));
+                Vehicle vehicle = getVehicle(resultSet);
                 vehicles.add(vehicle);
             }
             return vehicles;

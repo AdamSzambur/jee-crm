@@ -48,13 +48,7 @@ public class CustomerDao {
             statement.setInt(1, customerId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Customer customer = new Customer();
-                customer.setId(resultSet.getInt("id"));
-                customer.setFirstName(resultSet.getString("firstname"));
-                customer.setLastName(resultSet.getString("lastname"));
-                customer.setBirthDate(resultSet.getString("birth_date"));
-                customer.setEmail(resultSet.getString("email"));
-                customer.setBirthDateNotify(resultSet.getString("birth_date_notify"));
+                Customer customer = getCustomer(resultSet);
                 return customer;
             }
         } catch (SQLException ex) {
@@ -62,6 +56,17 @@ public class CustomerDao {
             throw new RuntimeException(ex.getMessage());
         }
         return null;
+    }
+
+    private Customer getCustomer(ResultSet resultSet) throws SQLException {
+        Customer customer = new Customer();
+        customer.setId(resultSet.getInt("id"));
+        customer.setFirstName(resultSet.getString("firstname"));
+        customer.setLastName(resultSet.getString("lastname"));
+        customer.setBirthDate(resultSet.getString("birth_date"));
+        customer.setEmail(resultSet.getString("email"));
+        customer.setBirthDateNotify(resultSet.getString("birth_date_notify"));
+        return customer;
     }
 
     public void update(Customer customer) {
@@ -102,13 +107,7 @@ public class CustomerDao {
             PreparedStatement statement = conn.prepareStatement(READ_ALL_QUERY);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Customer customer = new Customer();
-                customer.setId(resultSet.getInt("id"));
-                customer.setFirstName(resultSet.getString("firstname"));
-                customer.setLastName(resultSet.getString("lastname"));
-                customer.setBirthDate(resultSet.getString("birth_date"));
-                customer.setEmail(resultSet.getString("email"));
-                customer.setBirthDateNotify(resultSet.getString("birth_date_notify"));
+                Customer customer = getCustomer(resultSet);
                 customers.add(customer);
             }
             return customers;
@@ -124,13 +123,7 @@ public class CustomerDao {
             PreparedStatement statement = conn.prepareStatement(BIRTH_DATE_NOTIFY_QUERY);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Customer customer = new Customer();
-                customer.setId(resultSet.getInt("id"));
-                customer.setFirstName(resultSet.getString("firstname"));
-                customer.setLastName(resultSet.getString("lastname"));
-                customer.setBirthDate(resultSet.getString("birth_date"));
-                customer.setEmail(resultSet.getString("email"));
-                customer.setBirthDateNotify(resultSet.getString("birth_date_notify"));
+                Customer customer = getCustomer(resultSet);
                 customers.add(customer);
             }
             return customers;

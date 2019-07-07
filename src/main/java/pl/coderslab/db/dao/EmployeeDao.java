@@ -48,14 +48,7 @@ public class EmployeeDao {
             statement.setInt(1, employeeId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Employee employee = new Employee();
-                employee.setId(resultSet.getInt("id"));
-                employee.setFirstName(resultSet.getString("firstname"));
-                employee.setLastName(resultSet.getString("lastname"));
-                employee.setAddress(resultSet.getString("address"));
-                employee.setPhoneNumber(resultSet.getString("phone_number"));
-                employee.setNote(resultSet.getString("note"));
-                employee.setHourCost(resultSet.getDouble("hour_cost"));
+                Employee employee = getEmployee(resultSet);
                 return employee;
             }
         } catch (SQLException ex) {
@@ -63,6 +56,18 @@ public class EmployeeDao {
             throw new RuntimeException(ex.getMessage());
         }
         return null;
+    }
+
+    private Employee getEmployee(ResultSet resultSet) throws SQLException {
+        Employee employee = new Employee();
+        employee.setId(resultSet.getInt("id"));
+        employee.setFirstName(resultSet.getString("firstname"));
+        employee.setLastName(resultSet.getString("lastname"));
+        employee.setAddress(resultSet.getString("address"));
+        employee.setPhoneNumber(resultSet.getString("phone_number"));
+        employee.setNote(resultSet.getString("note"));
+        employee.setHourCost(resultSet.getDouble("hour_cost"));
+        return employee;
     }
 
     public void update(Employee employee) {
@@ -99,14 +104,7 @@ public class EmployeeDao {
             PreparedStatement statement = conn.prepareStatement(READ_ALL_QUERY);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Employee employee = new Employee();
-                employee.setId(resultSet.getInt("id"));
-                employee.setFirstName(resultSet.getString("firstname"));
-                employee.setLastName(resultSet.getString("lastname"));
-                employee.setAddress(resultSet.getString("address"));
-                employee.setPhoneNumber(resultSet.getString("phone_number"));
-                employee.setNote(resultSet.getString("note"));
-                employee.setHourCost(resultSet.getDouble("hour_cost"));
+                Employee employee = getEmployee(resultSet);
                 employees.add(employee);
             }
             return employees;
