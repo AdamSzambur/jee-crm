@@ -67,6 +67,8 @@ Projekt Warsztat Samochodowy CRM
 
 ##### Back-end
 
+[+] DAO (GRUD)
+
 [+] javax.servlet-api
 
 [+] jstl
