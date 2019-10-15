@@ -32,7 +32,6 @@ public class EmployeeAdd extends HttpServlet {
             getServletContext().getRequestDispatcher("/employeeAdd.jsp").forward(request, response);
         }
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/employeeAdd.jsp").forward(request, response);
     }
